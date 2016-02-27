@@ -3,6 +3,18 @@
 {% block title %} smarshy {% endblock %}
 {% block content %}
 <a name="stats"></a>
+<table class="columns charts">
+  <tr>
+    <td><div id="pull_request_chart_div" style="border: 1px solid #ccc"></div></td>
+    <td><div id="language_chart_div" style="border: 1px solid #ccc"></div></td>
+  </tr>
+  <tr>
+    <td><div id="contributions_chart_div" style="border: 1px solid #ccc"></div></td>
+    <td><div id="commit_frequency_chart_div" style="border: 1px solid #ccc"></div></td>
+  </tr>
+</table>
+
+
 <div id="pull_request_chart_div"></div>
 {% endblock %}
 {% block script %} 
@@ -11,8 +23,14 @@
     <script type="text/javascript">
 
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
+
+      google.charts.setOnLoadCallback(drawPullChart);      
+      google.charts.setOnLoadCallback(drawLanguageChart);
+      google.charts.setOnLoadCallback(drawContributionChart);
+      google.charts.setOnLoadCallback(drawCommitChart);
+
+
+      function drawPullChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Status');
         data.addColumn('number', 'Stats');
@@ -23,10 +41,73 @@
         ]);
 
         var options = {'title':'Analysis of Pull Requests',
-                       'width':500,
-                       'height':500};
+                       'width':600,
+                       'height':500,
+                       'pieHole': 0.4,
+                     };
 
         var chart = new google.visualization.PieChart(document.getElementById('pull_request_chart_div'));
+        chart.draw(data, options);
+      }
+
+      function drawLanguageChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Language');
+        data.addColumn('number', 'Repos');
+        data.addRows([
+          ['Python', 3],
+          ['Javascript', 5],
+          ['CSS', 1],
+          ['C++', 7]
+        ]);
+
+        var options = {'title':'Analysis of Repositories in terms of Language',
+                       'width':600,
+                       'height':500,
+                       'is3D':true};
+
+        var chart = new google.visualization.PieChart(document.getElementById('language_chart_div'));
+        chart.draw(data, options);
+      }
+
+      function drawContributionChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Language');
+        data.addColumn('number', 'Repos');
+        data.addRows([
+          ['Pull Request', 3],
+          ['Issues', 5],
+        ]);
+
+        var options = {'title':'Types of Contributions',
+                       'width':600,
+                       'height':500,
+                     };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('contributions_chart_div'));
+        chart.draw(data, options);
+      }
+
+      function drawCommitChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Days');
+        data.addColumn('number', 'Frequency');
+        data.addRows([
+          ['Monday', 3],
+          ['Tuesday', 5],
+          ['Wednesday', 3],
+          ['Thursday', 8],
+          ['Friday', 23],
+          ['Saturday', 6],
+          ['Sunday', 13],
+        ]);
+
+        var options = {'title':'Commit Frequency over days',
+                       'width':600,
+                       'height':500,
+                     };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('commit_frequency_chart_div'));
         chart.draw(data, options);
       }
     </script>
