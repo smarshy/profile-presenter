@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'profile_presenter',
     'my_profile',
     'general_analysis',
-    'chartit',
 )
 
 MIDDLEWARE_CLASSES = (
