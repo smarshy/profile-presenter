@@ -1,8 +1,55 @@
-<html>
-  <head>
-    <title>home</title>
-  </head>
-  <body>
-    <p>Home page</p>
-  </body>
-</html>
+{% extends "profile_presenter/base.html" %}
+{% load staticfiles %}
+{% block title %} Home {% endblock %}
+{% block content %}
+    <div class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Github statistics</h1>
+                        <h3>Get your profile analysed and presented in the form of colourful charts</h3>
+                        <hr class="intro-divider">
+                        <p></p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+<a name="stats"></a>
+
+<section class="container content-section text-center stats">
+    <div class="row">
+    <div class="col-lg-4 col-lg-offset-1 thumbnail card">  
+        <img src="/static/img/me.jpeg" style ="height:150px;width:150px" alt="profile pic">
+      <div class="caption">
+        <h3>smarshy</h3>
+        <p>View statistics and listed contributions</p>
+        <span>
+            <a href="{% url 'my_profile:index' %}" class="btn btn-primary">View profile</a>
+        </span> 
+      </div>           
+    </div>
+    <div class="col-lg-6 col-lg-offset-1 thumbnail card1">  
+        <p>You can also search by your username to view your github statistics </p>
+        <br>
+        <form class="form-horizontal" role="search" action="/analyse/" method="POST">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Github Username * </label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="location" id="location-input" placeholder="eg. smarshy"> 
+                    </div>
+                </div>                
+                <span>
+                    <button type="submit" class="btn btn-success col-sm-3 col-sm-offset-4">Analyse!</button>
+                </span>                                                                                 
+        </form> 
+    </div>    
+    </div>  
+</section>
+
+{% endblock %}    
+
+{% block script %} 
+{% endblock %}
