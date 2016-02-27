@@ -1,8 +1,36 @@
 <html>
   <head>
-    <title>Smarshy</title>
+  	<title>smarshy</title>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Status');
+        data.addColumn('number', 'Stats');
+        data.addRows([
+          ['Merged', 3],
+          ['Open', 1],
+          ['Unmerged and closed', 1]
+        ]);
+
+        var options = {'title':'Analysis of Pull Requests',
+                       'width':500,
+                       'height':500};
+
+        var chart = new google.visualization.PieChart(document.getElementById('pull_request_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
   </head>
+
   <body>
-    <p>Vatsala's profile </p>
+    <div id="pull_request_chart_div"></div>
   </body>
 </html>
+
+
+
