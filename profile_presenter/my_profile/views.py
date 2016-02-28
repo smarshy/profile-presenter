@@ -10,6 +10,7 @@ def index(request):
 	languages = get_language_analysis(username)
 	stats = get_contributions_analysis(username)
 	commit_act = get_commit_analysis(username)
+	print get_contributions_list(username)
 	print stats
 	print languages
 	print commit_act
