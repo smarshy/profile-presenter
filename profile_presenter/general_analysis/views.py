@@ -10,8 +10,13 @@ def index(request):
 
 	if request.method == 'POST':
 		username = str(request.POST.get('usename', ''))
-
 	print username
 
-	return render(request, 'my_profile/my_profile.html')
+	languages = get_language_analysis(username)
+	stats = get_contributions_analysis(username)
+	commit_act = get_commit_analysis(username)
+	print stats
+	print languages
+	print commit_act
+	return render(request, 'general_analysis/display_analysis.html', {'stats': stats, 'user': username, 'languages': languages, 'commit': commit_act})
 
