@@ -90,9 +90,6 @@ def get_commit_analysis(username):
 		print "Check if username is valid/internet connection"
 		return False
 
-	print "\nRepositories for user " + str(username)
-	print
-
 	for repo in repos:
 		if not repo['fork'] and not repo['private']:
 			repositories.append(str(repo['full_name']))
@@ -143,9 +140,9 @@ def get_contributions_list(username):
 		return False
 
 	for pr in prs:
-		pr_list.append(pr['html_url'])
+		pr_list.append(str(pr['html_url']))
 
 	for issue in issues:
-		issue_list.append(issue['html_url']) 
+		issue_list.append(str(issue['html_url'])) 
 
 	return {'prs':pr_list, 'issues':issue_list}
