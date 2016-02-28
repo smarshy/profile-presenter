@@ -11,7 +11,10 @@
   <p>Merged Pull Requests: {{stats.merged_prs}}</p>
   <p>Open Pull Requests: {{stats.open_prs}}</p>
   <p>Closed and Unmerged Pull Requests: {{stats.unmerged_prs}}</p>
-
+  <p>Languages: {{languages}}</p>
+    {% for key,value in languages.items %}
+    {{key}} - {{value}}
+    {% endfor %}
 </section>
 <table class="columns charts">
   <tr>
@@ -62,12 +65,11 @@
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Language');
         data.addColumn('number', 'Repos');
+        {% for key,value in languages.items %}
         data.addRows([
-          ['Python', 3],
-          ['Javascript', 5],
-          ['CSS', 1],
-          ['C++', 7]
+          ['{{key}}' ,{{value}}],
         ]);
+        {% endfor %}
 
         var options = {'title':'Analysis of Repositories in terms of Language',
                        'width':600,
