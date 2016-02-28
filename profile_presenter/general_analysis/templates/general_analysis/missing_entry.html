@@ -2,11 +2,12 @@
 {% load staticfiles %}
 {% block title %} Missing {% endblock %}
 {% block content %}  
-    <section class="container content-section text-center">
+<a name="stats"></a>
+    <section class="container content-section text-center stats">
     <div class="row">                       
         <p class="col-sm-12">Oops! Looks like you forgot to mention a username....</p>
         <span>
-            <a href="{% url 'home' %}" class="btn btn-success btn-lg">Back to Home</a>
+            <a href="{% url 'home' %}" class="btn btn-danger btn-lg">Back to Home</a>
         </span> 
     </div>                                                             
     </section>
