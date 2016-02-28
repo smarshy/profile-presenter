@@ -12,6 +12,9 @@ def index(request):
 		username = str(request.POST.get('usename', ''))
 	print username
 
+	if not username:
+		return render_to_response('general_analysis/missing_entry.html', context_instance=RequestContext(request))
+
 	languages = get_language_analysis(username)
 	stats = get_contributions_analysis(username)
 	commit_act = get_commit_analysis(username)
