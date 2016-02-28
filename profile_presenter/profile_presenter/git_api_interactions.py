@@ -14,24 +14,22 @@ def get_items(url):
 	return response['items']
 
 def get_contributions_analysis(username):
-	url = "https://api.github.com/search/issues?q=author:" + username + "+type:"
+
+	statistics = {}
+	url = "https://api.github.com/search/issues?q=author:" + str(username) + "+type:"
 
 	url1 = url + "issue"
-	url2 = url + "issue+is:closed"
-	url3 = url + "issue+is:open"
-	url4 = url + "pr"
-	url5 = url + "pr+is:open"
-	url6 = url + "pr+is:closed+is:unmerged"
-	url7 = url + "pr+is:closed+is:merged"
+	url2 = url + "pr"
+	url3 = url + "pr+is:open"
+	url4 = url + "pr+is:closed+is:unmerged"
+	url5 = url + "pr+is:closed+is:merged"
 
 	try:
 		statistics['Total Issues'] = get_count(url1)
-		statistics['Closed Issues'] = get_count(url2)
-		statistics['Open Issues'] = get_count(url3)
-		statistics['Total PRs'] = get_count(url4)
-		statistics['Open PRs'] = get_count(url5)
-		statistics['Unmerged PRs'] = get_count(url6)
-		statistics['Merged PRs'] = get_count(url7)		
+		statistics['Total PRs'] = get_count(url2)
+		statistics['Open PRs'] = get_count(url3)
+		statistics['Unmerged PRs'] = get_count(url4)
+		statistics['Merged PRs'] = get_count(url5)	
 	except:
 		print "Check if username is valid/internet connection"
 		return False
@@ -40,6 +38,7 @@ def get_contributions_analysis(username):
 
 def get_language_analysis(username):
 
+	languages = []
 	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username 
 	try:
 		repos = get_items(url)
