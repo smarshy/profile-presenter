@@ -8,7 +8,9 @@ def index(request):
 	username = "smarshy"
 	languages = get_language_analysis(username)
 	stats = get_contributions_analysis(username)
+	commit_act = get_commit_analysis(username)
 	print stats
 	print languages
-	return render(request, 'my_profile/my_profile.html', {'stats': stats, 'user': username, 'languages': languages})
+	print commit_act
+	return render(request, 'my_profile/my_profile.html', {'stats': stats, 'user': username, 'languages': languages, 'commit': commit_act})
 
