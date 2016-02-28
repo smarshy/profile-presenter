@@ -39,6 +39,8 @@ def get_contributions_analysis(username):
 def get_language_analysis(username):
 
 	languages = []
+	my_lang = {}
+
 	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username 
 	try:
 		repos = get_items(url)
@@ -55,4 +57,8 @@ def get_language_analysis(username):
 	for language in languages:
 		analysed[language] += 1
 
-	return analysed.items()
+	for key,value in analysed.items():
+		my_lang[str(key)] = value
+
+	return my_lang
+
