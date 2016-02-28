@@ -24,11 +24,11 @@ def get_contributions_analysis(username):
 	statistics = {}
 	url = "https://api.github.com/search/issues?q=author:" + str(username) + "+type:"
 
-	url1 = url + "issue"
-	url2 = url + "pr"
-	url3 = url + "pr+is:open"
-	url4 = url + "pr+is:closed+is:unmerged"
-	url5 = url + "pr+is:closed+is:merged"
+	url1 = url + "issue" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url2 = url + "pr" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url3 = url + "pr+is:open" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url4 = url + "pr+is:closed+is:unmerged" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url5 = url + "pr+is:closed+is:merged" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
 
 	try:
 		statistics['issues'] = get_count(url1)
@@ -47,7 +47,7 @@ def get_language_analysis(username):
 	languages = []
 	my_lang = {}
 
-	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username 
+	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
 	try:
 		repos = get_items(url)
 	except:
@@ -82,7 +82,7 @@ def get_commit_analysis(username):
 	days_count['saturday'] = 0
 
 
-	url = "https://api.github.com/users/" + username  + "/repos" 
+	url = "https://api.github.com/users/" + username  + "/repos" + "?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
 
 	try:
 		repos = get_response(url)
@@ -100,7 +100,7 @@ def get_commit_analysis(username):
 	print repositories
 
 	for repo in repositories:
-		url_for_repo = "https://api.github.com/repos/" + str(repo) + "/stats/commit_activity" 
+		url_for_repo = "https://api.github.com/repos/" + str(repo) + "/stats/commit_activity" + "?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
 		try:
 			data = get_response(url_for_repo)
 			if data:
