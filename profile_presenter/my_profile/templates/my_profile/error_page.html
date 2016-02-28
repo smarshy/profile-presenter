@@ -1,0 +1,13 @@
+{% extends "profile_presenter/base.html" %}
+{% load staticfiles %}
+{% block title %} Error {% endblock %}
+{% block content %}  
+    <section class="container content-section text-center">
+    <div class="row">                       
+        <p class="col-sm-12">Oops! An unexpected error occured .... The API failed to fetch data</p>
+        <span>
+            <a href="{% url 'home' %}" class="btn btn-success btn-lg">Back to Home</a>
+        </span> 
+    </div>                                                             
+    </section>
+{% endblock %} 
