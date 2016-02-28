@@ -25,11 +25,11 @@ def get_contributions_analysis(username):
 	url5 = url + "pr+is:closed+is:merged"
 
 	try:
-		statistics['Total Issues'] = get_count(url1)
-		statistics['Total PRs'] = get_count(url2)
-		statistics['Open PRs'] = get_count(url3)
-		statistics['Unmerged PRs'] = get_count(url4)
-		statistics['Merged PRs'] = get_count(url5)	
+		statistics['issues'] = get_count(url1)
+		statistics['prs'] = get_count(url2)
+		statistics['open_prs'] = get_count(url3)
+		statistics['unmerged_prs'] = get_count(url4)
+		statistics['merged_prs'] = get_count(url5)	
 	except:
 		print "Check if username is valid/internet connection"
 		return False
