@@ -98,13 +98,13 @@
         data.addColumn('string', 'Days');
         data.addColumn('number', 'Frequency');
         data.addRows([
-          ['Monday', 3],
-          ['Tuesday', 5],
-          ['Wednesday', 3],
-          ['Thursday', 8],
-          ['Friday', 23],
-          ['Saturday', 6],
-          ['Sunday', 13],
+          ['Monday', {{commit.monday}}],
+          ['Tuesday', {{commit.tuesday}}],
+          ['Wednesday', {{commit.wednesday}}],
+          ['Thursday', {{commit.thursday}}],
+          ['Friday', {{commit.friday}}],
+          ['Saturday', {{commit.saturday}}],
+          ['Sunday', {{commit.sunday}}],
         ]);
 
         var options = {'title':'Commit Frequency over days',
