@@ -33,9 +33,12 @@ def get_contributions_analysis(username):
 	try:
 		statistics['issues'] = get_count(url1)
 		statistics['prs'] = get_count(url2)
-		statistics['open_prs'] = get_count(url3)
-		statistics['unmerged_prs'] = get_count(url4)
-		statistics['merged_prs'] = get_count(url5)	
+		if statistics['issues'] or statistics['prs']:
+			statistics['open_prs'] = get_count(url3)
+			statistics['unmerged_prs'] = get_count(url4)
+			statistics['merged_prs'] = get_count(url5)	
+		else:
+			return {}
 	except:
 		print "Check if username is valid/internet connection"
 		return False
@@ -115,10 +118,6 @@ def get_commit_analysis(username):
 		except:
 			print "Error in internet connection"
 			return False
-
-	print
-	print "Commit activity pattern for user owned repositories in the past month -"
-	print
 
 	return days_count
 

@@ -6,13 +6,25 @@
 <section class="container content-section text-center stats">
   <h4 style ="color:maroon;">Statistics for user: {{user}}</h4>
   <br>
+  {% if stats %}
   <p>Total issues: {{stats.issues}}</p>
   <p>Total Pull Requests: {{stats.prs}}</p>
   <p>Merged Pull Requests: {{stats.merged_prs}}</p>
   <p>Open Pull Requests: {{stats.open_prs}}</p>
   <p>Closed and Unmerged Pull Requests: {{stats.unmerged_prs}}</p>
+  {% else %}
+  <p>Total issues: 0</p>
+  <p>Total Pull Requests: 0</p>
+  <p>Merged Pull Requests: 0</p>
+  <p>Open Pull Requests: 0</p>
+  <p>Closed and Unmerged Pull Requests: 0</p>
+
+  {% endif %}
+
+
 </section>
 <table class="columns charts">
+  {% if stats %}
   <tr>
     <td><div id="pull_request_chart_div" style="border: 1px solid #ccc"></div></td>
     <td><div id="commit_frequency_chart_div" style="border: 1px solid #ccc"></div></td>
@@ -21,6 +33,12 @@
     <td><div id="contributions_chart_div" style="border: 1px solid #ccc"></div></td>
     <td><div id="language_chart_div" style="border: 1px solid #ccc"></div></td>
   </tr>
+  {% else %}
+  <tr>
+    <td><div id="commit_frequency_chart_div" style="border: 1px solid #ccc"></div></td>
+    <td><div id="language_chart_div" style="border: 1px solid #ccc"></div></td>
+  </tr>
+  {% endif %}
 </table>
 {% endblock %}
 
@@ -29,12 +47,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
-
-      google.charts.setOnLoadCallback(drawPullChart);      
-      google.charts.setOnLoadCallback(drawLanguageChart);
+                     
+      {% if stats %}
+      google.charts.setOnLoadCallback(drawPullChart);
       google.charts.setOnLoadCallback(drawContributionChart);
+      {% endif %}
       google.charts.setOnLoadCallback(drawCommitChart);
-
+      google.charts.setOnLoadCallback(drawLanguageChart);
 
       function drawPullChart() {
         var data = new google.visualization.DataTable();

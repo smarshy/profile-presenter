@@ -22,7 +22,7 @@ def index(request):
 	print languages
 	print commit_act
 
-	if languages and stats and commit_act:
+	if commit_act:
 		return render(request, 'general_analysis/display_analysis.html', {'stats': stats, 'user': username, 'languages': languages, 'commit': commit_act})
 	else:
 		return render_to_response('general_analysis/error_page.html', context_instance=RequestContext(request))
