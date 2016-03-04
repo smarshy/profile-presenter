@@ -1,6 +1,8 @@
 import requests
 from collections import defaultdict
 
+API_KEY = "22f95e569456a47a3b18088588d2d70f63a1fec4"
+
 def get_response(url):
 
 	r = requests.get(url)
@@ -24,11 +26,11 @@ def get_contributions_analysis(username):
 	statistics = {}
 	url = "https://api.github.com/search/issues?q=author:" + str(username) + "+type:"
 
-	url1 = url + "issue" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
-	url2 = url + "pr" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
-	url3 = url + "pr+is:open" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
-	url4 = url + "pr+is:closed+is:unmerged" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
-	url5 = url + "pr+is:closed+is:merged" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url1 = url + "issue" + "&?access_token=" + API_KEY
+	url2 = url + "pr" + "&?access_token=" + API_KEY
+	url3 = url + "pr+is:open" + "&?access_token=" + API_KEY
+	url4 = url + "pr+is:closed+is:unmerged" + "&?access_token=" + API_KEY
+	url5 = url + "pr+is:closed+is:merged" + "&?access_token=" + API_KEY
 
 	try:
 		statistics['issues'] = get_count(url1)
@@ -50,7 +52,7 @@ def get_language_analysis(username):
 	languages = []
 	my_lang = {}
 
-	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url = "https://api.github.com/search/repositories?q=fork:false+user:" + username + "&?access_token=" + API_KEY
 	try:
 		repos = get_items(url)
 	except:
@@ -85,7 +87,7 @@ def get_commit_analysis(username):
 	days_count['saturday'] = 0
 
 
-	url = "https://api.github.com/users/" + username  + "/repos" + "?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url = "https://api.github.com/users/" + username  + "/repos" + "?access_token=" + API_KEY
 
 	try:
 		repos = get_response(url)
@@ -98,7 +100,7 @@ def get_commit_analysis(username):
 			repositories.append(str(repo['full_name']))
 
 	for repo in repositories:
-		url_for_repo = "https://api.github.com/repos/" + str(repo) + "/stats/commit_activity" + "?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+		url_for_repo = "https://api.github.com/repos/" + str(repo) + "/stats/commit_activity" + "?access_token=" + API_KEY
 		try:
 			data = get_response(url_for_repo)
 			if data:
@@ -128,8 +130,8 @@ def get_contributions_list(username):
 	pr_list = []
 	issue_list = []
 
-	url1 = url + "issue" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
-	url2 = url + "pr" + "&?access_token=22f95e569456a47a3b18088588d2d70f63a1fec4"
+	url1 = url + "issue" + "&?access_token=" + API_KEY
+	url2 = url + "pr" + "&?access_token=" + API_KEY
 
 	try:
 		issues = get_items(url1)
